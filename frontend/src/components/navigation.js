@@ -1,19 +1,40 @@
 // React icons
-import React from 'react';
-import { Link } from 'react-router-dom';
+import { NavLink, Link } from 'react-router-dom';
+import React, { useState, useEffect } from 'react';
 import { HiPlay } from "react-icons/hi2";
 import { TbScoreboard } from "react-icons/tb";
 import { IoHome } from "react-icons/io5";
 
 // Navigation
 function Navigation() {
+  const initialSelectedGame = JSON.parse(localStorage.getItem('selectedGame')) || '';
+  const [selectedGame, setSelectedGame] = useState(initialSelectedGame);
+  console.log("Selected Game:", selectedGame)
+
+  useEffect(() => {
+    const initialSelectedGame = JSON.parse(localStorage.getItem('selectedGame')) || '';
+    setSelectedGame(initialSelectedGame);
+  }, []);
+
   return (
-    <div class="topnav">
-      <nav class="global">
+    <div className="topnav">
+      <nav className="global">
           {/* Add links to Home */}
           <Link to="/">Home <IoHome /></Link>
-          <Link to="/play">Play <HiPlay /></Link>
-          <Link to="/scores">Scores <TbScoreboard /></Link>
+          <NavLink to="/play">Play <HiPlay /></NavLink>
+          <NavLink to="/scores">Scores <TbScoreboard /></NavLink>
+
+          {(selectedGame === 'friends') && (
+            <>
+            <NavLink to="/play-friends">Play Friends </NavLink>
+            </>
+          )}
+
+          {(selectedGame === 'teams') && (
+            <>
+            <NavLink to="/play-teams">Play Teams </NavLink>
+            </>
+          )}
       </nav>
     </div>
   );

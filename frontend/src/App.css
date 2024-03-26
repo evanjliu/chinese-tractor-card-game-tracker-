@@ -31,7 +31,7 @@
   --red: red;
   --gold: gold;
   --text: white;
-  --background: #282c34;
+  --background: #0d110bf5;
 }
 
 * { 
@@ -84,6 +84,7 @@ main {
 .logo-link a:visited{
   text-decoration: none;
 }
+
 footer {
   justify-content: center;
 }
@@ -111,6 +112,7 @@ footer {
 
 /* Add a color to the active/current link */
 .topnav a.active {
-  background-color: #04AA6D;
+  background-color: #681f0dbd;
   color: var(--text);
+  border-radius: 10px;
 }

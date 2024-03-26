@@ -11,6 +11,8 @@ import './App.css';
 import HomePage from './pages/home-page';
 import PlayGamePage from './pages/play-game-page';
 import ScoresPage from './pages/scores-page';
+import PlayFriends from "./pages/play-friends";
+import PlayTeams from "./pages/play-teams";
 
 
 function App() {
@@ -20,7 +22,7 @@ function App() {
     <div className="App">
 
     <header className="App-header">
-        <div class="logo-link">
+        <div className="logo-link">
           <Link to="/">Tractor Helper (拖拉机)</Link>
         </div>
         <Navigation />
@@ -30,8 +32,16 @@ function App() {
       <section>
         <Routes>
           <Route path='/' element={<HomePage />} />
+
+          {/* Games pages */}
           <Route path='/play' element={<PlayGamePage />} />
+          <Route path='/play-friends' element={<PlayFriends />} />
+          <Route path='/play-teams' element={<PlayTeams />} />
+
+          {/* Scores pages */}
           <Route path='/scores' element={<ScoresPage />} />
+
+          {/* All erroneous pages */}
           <Route path='*' element={<HomePage />} />
         </Routes>
       </section>
