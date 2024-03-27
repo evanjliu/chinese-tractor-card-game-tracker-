@@ -7,6 +7,30 @@
   pointer-events: none;
 }
 
+/* 
+  KEY FRAMES for transitions
+*/
+@keyframes pulse {
+  0% {
+    transform: scale(1); /* Start with normal size */
+  }
+  50% {
+    transform: scale(1.1); /* Scale up */
+  }
+  100% {
+    transform: scale(1); /* Back to normal size */
+  }
+}
+
+@keyframes rotate {
+  0% {
+    transform: rotate(0deg); /* Start rotation angle */
+  }
+  100% {
+    transform: rotate(360deg); /* End rotation angle */
+  }
+}
+
 /*
 @media (prefers-reduced-motion: no-preference) {
   .App-logo {
@@ -108,6 +132,7 @@ footer {
 .topnav a:hover {
   background-color: #ddd;
   color: black;
+  animation: pulse 2.5s linear infinite;
 }
 
 /* Add a color to the active/current link */
@@ -115,4 +140,19 @@ footer {
   background-color: #681f0dbd;
   color: var(--text);
   border-radius: 10px;
+}
+
+.no-decor{
+  color:var(--text)
+}
+
+.game-start{
+  justify-content: center;
+  text-align: center;
+}
+
+/* Player Table and Scores */
+.player-names{
+  margin:auto;
+  padding:10px;
 }

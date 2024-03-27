@@ -14,12 +14,16 @@ const PlayGamePage = () => {
     const initialNumPlayers = parseInt(localStorage.getItem('numPlayers')) || 2;
     const initialPlayerNames = JSON.parse(localStorage.getItem('playerNames')) || [''];
     const initialSelectedGame = JSON.parse(localStorage.getItem('selectedGame')) || '';
+    const initialPlayerScores = JSON.parse(localStorage.getItem('playerScores')) || [''];
+    const initialPlayerCards = JSON.parse(localStorage.getItem('playerCards')) || [''];
 
     // Declares real time variables for the number of players, player names, and game type.
     const [numPlayers, setNumPlayers] = useState(initialNumPlayers);
     const [playerNames, setPlayerNames] = useState(initialPlayerNames);
     const [showGameSelection, setShowGameSelection] = useState(false);
     const [selectedGame, setSelectedGame] = useState(initialSelectedGame);
+    const [playerScores, setPlayerScores] = useState(initialPlayerScores);
+    const [playerCards, setPlayerCards] = useState(initialPlayerCards);
 
     // Sets number of players, player names, and selected game to local storage.
     useEffect(() => {
@@ -27,6 +31,8 @@ const PlayGamePage = () => {
         localStorage.setItem('numPlayers', numPlayers);
         localStorage.setItem('playerNames', JSON.stringify(playerNames));
         localStorage.setItem('selectedGame', JSON.stringify(selectedGame));
+        localStorage.setItem('playerScores', JSON.stringify(playerScores));
+        localStorage.setItem('playerCards', JSON.stringify(playerCards));
     }, 
     [numPlayers, playerNames, selectedGame]);
 
@@ -35,6 +41,8 @@ const PlayGamePage = () => {
         const num = parseInt(e.target.value);
         setNumPlayers(num);
         setPlayerNames(new Array(num).fill('').map((_, index) => playerNames[index] || ''));
+        setPlayerScores(new Array(num).fill('').map((_, index) => '0'));
+        setPlayerCards(new Array(num).fill('').map((_, index) => '2'));
     };
 
     // Adds new player when typed into the input form
@@ -59,8 +67,7 @@ const PlayGamePage = () => {
         console.log('Selected Game:', game);
 
         // Redirect to the game page or perform other actions here
-        if (selectedGame && selectedGame === 'friends'){
-
+        if (game === 'friends'){
             redirect('/play-friends')
         } else {
             redirect('/play-teams')
@@ -73,10 +80,13 @@ const PlayGamePage = () => {
         setNumPlayers(2); // Reset numPlayers state
         setPlayerNames(['']); // Reset playerNames state
         setSelectedGame(''); // Reset selected game state
+        setShowGameSelection(false); // Closes game selection fields
       };
 
     return (
         <div>
+            <h1>Player Information:</h1>
+            <p className="warning">WARNING: Modifying the number of players may reset the current scores of players.</p>
             <form onSubmit={handleSubmit}>
                 <label htmlFor="numPlayers">Number of Players: </label>
                 <input
@@ -98,6 +108,8 @@ const PlayGamePage = () => {
                     id={`player${index}`}
                     name={`player${index}`}
                     value={playerNames[index]}
+                    required
+                    pattern="^\S(.*\S)?$"
                     onChange={(e) => handlePlayerNameChange(e, index)}
                     />
                 </div>
@@ -107,9 +119,10 @@ const PlayGamePage = () => {
             </form>
           {showGameSelection && (
             <div className="game-selection-modal">
-              <h2>Choose a Game:</h2>
-              <button onClick={() => handleGameSelection('friends')}>Friends</button>
-              <button onClick={() => handleGameSelection('teams')}>Teams</button>
+                <h2>Choose a Game:</h2>
+
+                <button onClick={() => handleGameSelection('friends')}>Friends</button>
+                <button onClick={() => handleGameSelection('teams')}>Teams</button>
             </div>
           )}
           <div id="reset">
