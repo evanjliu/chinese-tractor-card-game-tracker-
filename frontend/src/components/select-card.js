@@ -8,12 +8,84 @@ import React, {useState, useEffect} from 'react'
 import { useNavigate } from "react-router-dom";
 import { NavLink } from "react-router-dom";
 
-const selectCard = () => {
+const SelectCard = ({ onCardSelect, card}) => {
+    const [selectedCard, setSelectedCard] = useState('');
+
+    // Function to handle card selection
+    const handleSelect = (pickedCard) => {
+        setSelectedCard(pickedCard);
+        // Invoke the callback function with the selected card value
+        onCardSelect(pickedCard);
+  };
+
     return(
-        <>
-        <GiCard10Clubs></GiCard10Clubs>
-        </>
+        <div className="popup-screen">
+            <h1>Please select the trump suit:</h1>
+            {(card == '2') ? (
+                <div className="display-cards">
+                    <label>
+                        <input
+                        type="radio"
+                        name="icon"
+                        value="heart"                
+                        />
+                        <GiCard2Clubs />
+                    </label>
+                    <button onClick={() => handleSelect('clubs')}><GiCard2Clubs /></button>
+                </div>
+            ) : card =='3' ? (
+                <div className="display-cards">
+                    
+                </div>
+            ) : card =='4' ? (
+                <div className="display-cards">
+                    
+                </div>
+            ) : card =='5' ? (
+                <div className="display-cards">
+                    
+                </div>
+            ) : card =='6' ? (
+                <div className="display-cards">
+                    
+                </div>
+            ) : card =='7' ? (
+                <div className="display-cards">
+                    
+                </div>
+            ) : card =='8' ? (
+                <div className="display-cards">
+                    
+                </div>
+            ) : card =='9' ? (
+                <div className="display-cards">
+                    
+                </div>
+            ) : card =='10' ? (
+                <div className="display-cards">
+                    
+                </div>
+            ) : card =='J' ? (
+                <div className="display-cards">
+                    
+                </div>
+            ) : card =='Q' ? (
+                <div className="display-cards">
+                    
+                </div>
+            ) : card =='K' ? (
+                <div className="display-cards">
+                    
+                </div>
+            ) : card =='A' && (
+                <div className="display-cards">
+                    
+                </div>
+            )}
+
+                        
+        </div>
     )
 };
 
-export default selectCard
+export default SelectCard

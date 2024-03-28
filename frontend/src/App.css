@@ -55,7 +55,9 @@
   --red: red;
   --gold: gold;
   --text: white;
+  --text-dark: black;
   --background: #0d110bf5;
+  --popup-background: rgba(247, 233, 197, 0.897);
 }
 
 * { 
@@ -86,7 +88,6 @@ main {
   background:black;
   background:rgba(0,0,0,0.5);
   backdrop-filter: blur(6px);
-  
   margin: auto;
 }
 /* Header and footer */
@@ -155,4 +156,22 @@ footer {
 .player-names{
   margin:auto;
   padding:10px;
+}
+
+/* Pop up screen/forms */ 
+.popup-screen {
+  position: fixed;
+  color: var(--text-dark);
+  background-color: var(--popup-background);
+  max-width: 70%;
+  height: 70vh;
+  top: 50%;
+  left: 50%;
+  transform: translate(-50%, -70%);
+  padding: 20px;
+  border:1px solid black;
+  border-radius: 8px;
+  box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+  z-index: 9999;  /* Ensure the popup is on top of other elements */
+  margin: auto;
 }
